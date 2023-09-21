@@ -1,10 +1,10 @@
 import { createEffect, createSignal } from "solid-js";
-import { A } from "@solidjs/router";
 import { fetchPokemonDetail, fetchPokemonList } from "../service";
 import { useData } from "../hooks/use-data.hook";
 import "../index.css";
 import { PokemonCard } from "../components/pokemon-card.component";
 import { Container } from "../components/container.component";
+
 export function IndexPage() {
   const pokemonList = useData(() => fetchPokemonList());
   const [formattedPokemonList, setFormattedPokemonList] = createSignal();
