@@ -8,7 +8,7 @@ export async function fetchPokemonList() {
 }
 
 export async function fetchPokemonDetail(pokemonName) {
-  const response = await fetch(API_BASE_URL_ + "/pokemon/" + pokemonName);
+  const response = await fetch(API_BASE_URL + "/pokemon/" + pokemonName);
   const result = await response.json();
-  console.log(result);
+  return result;
 }
