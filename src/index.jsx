@@ -2,9 +2,9 @@
 import { render } from "solid-js/web";
 
 import "./index.css";
-import App from "./App";
+
 import { Route, Router, Routes } from "@solidjs/router";
-import { TestPage } from "./pages/test";
+import { IndexPage } from "./pages/index.page";
 import { PokemonDetailPage } from "./pages/pokemon-detail.page";
 
 const root = document.getElementById("root");
@@ -19,8 +19,7 @@ render(
   () => (
     <Router>
       <Routes>
-        <Route path="/" component={App} />
-        <Route path="/test" component={TestPage} />
+        <Route path="/" component={IndexPage} />
         <Route path="/pokemon/:pokemonName" component={PokemonDetailPage} />
       </Routes>
     </Router>

@@ -1,9 +1,11 @@
+import { createEffect, createSignal } from "solid-js";
 import { A } from "@solidjs/router";
-import { createEffect, createSignal, onCleanup } from "solid-js";
-import { useData } from "../hooks/use-data.hook";
 import { fetchPokemonDetail, fetchPokemonList } from "../service";
-
-export default function PokemonList() {
+import { useData } from "../hooks/use-data.hook";
+import "../index.css";
+import { PokemonCard } from "../components/pokemon-card.component";
+import { Container } from "../components/container.component";
+export function IndexPage() {
   const pokemonList = useData(() => fetchPokemonList());
   const [formattedPokemonList, setFormattedPokemonList] = createSignal();
   const [loading, setLoading] = createSignal(true);
@@ -15,6 +17,7 @@ export default function PokemonList() {
       return {
         name: pokemonDetailResponse.name,
         image: pokemonDetailResponse.sprites.front_default,
+        types: pokemonDetailResponse.types.map((type) => type.type.name),
       };
     });
 
@@ -29,20 +32,17 @@ export default function PokemonList() {
   });
 
   return (
-    <div>
-      <h2>Pokemon List</h2>
+    <Container>
+      <h2 class="text-xl font-bold mb-[50px]">Pokemon List</h2>
       {loading() ? (
         <h1>loading</h1>
       ) : (
-        formattedPokemonList()?.map((pokemon, index) => (
-          <ul>
-            <li key={index}>
-              <img src={pokemon.image} />
-              <A href={`/pokemon/${pokemon.name}`}>{pokemon.name}</A>
-            </li>
-          </ul>
-        ))
+        <div class="flex flex-wrap">
+          {formattedPokemonList()?.map((pokemon, index) => (
+            <PokemonCard pokemon={pokemon} />
+          ))}
+        </div>
       )}
-    </div>
+    </Container>
   );
 }

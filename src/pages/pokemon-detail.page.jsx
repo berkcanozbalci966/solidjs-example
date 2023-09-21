@@ -1,6 +1,7 @@
 import { useParams } from "@solidjs/router";
 import { useData } from "../hooks/use-data.hook";
 import { fetchPokemonDetail } from "../service";
+import "../index.css";
 
 export function PokemonDetailPage() {
   const params = useParams();
