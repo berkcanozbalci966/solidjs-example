@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App";
 import { Route, Router, Routes } from "@solidjs/router";
 import { TestPage } from "./pages/test";
+import { PokemonDetailPage } from "./pages/pokemon-detail.page";
 
 const root = document.getElementById("root");
 
@@ -20,6 +21,7 @@ render(
       <Routes>
         <Route path="/" component={App} />
         <Route path="/test" component={TestPage} />
+        <Route path="/pokemon/:pokemonName" component={PokemonDetailPage} />
       </Routes>
     </Router>
   ),

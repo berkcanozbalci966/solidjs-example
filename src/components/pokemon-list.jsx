@@ -1,20 +1,19 @@
+import { A } from "@solidjs/router";
 import { createSignal, onCleanup } from "solid-js";
-import { fetchPokemonList } from "../service";
+import { useData } from "../hooks/use-data.hook";
+import { fetchPokemonDetail, fetchPokemonList } from "../service";
 
 export default function PokemonList() {
-  const [pokemonList, setPokemonList] = createSignal([]);
-
-  // Verileri API'den al ve bileşene bağla
-  fetchPokemonList().then((data) => {
-    setPokemonList(data);
-  });
+  const pokemonList = useData(() => fetchPokemonList());
 
   return (
     <div>
       <h2>Pokemon List</h2>
       <ul>
         {pokemonList()?.map((pokemon, index) => (
-          <li key={index}>{pokemon.name}</li>
+          <li key={index}>
+            <A href={`/pokemon/${pokemon.name}`}>{pokemon.name}</A>
+          </li>
         ))}
       </ul>
     </div>
